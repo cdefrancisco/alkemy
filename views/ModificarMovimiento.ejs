@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <title>Gestor Productos</title>
+  </head>
+  <body>
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+		    </button>
+			
+		</div>
+    </nav>
+	
+	<div class="container mt-4">
+	  <div class="card-boarder-secondary">
+	    <div class="card-header">Nuevo Registro</div>
+		<!-- en el action va la url productos del router-->
+		<input type="text" id="idMovimiento" name="idMovimiento" value="<%=data[0].idMovimiento %>">
+          <form id="idFormMovimientos" action="" method="">
+			  <div class="mb-3">
+				
+				<label for="idTipo" class="form-label">Tipo Movimiento</label>
+				
+				<select class="form-select" id="idTipo" name="Tipo" >
+				   
+				   <option value="<%=data[0].idTipo %>">
+				         <%=data[0].TipoMovimiento%>
+				   </option>
+				   
+				</select>
+				
+			  </div>
+			  <div class="mb-3">
+				
+				<label for="idCategoria" class="form-label">Categoria</label>
+				
+				<select class="form-select" id="idCategoria" name="Categoria" onchange="cargarConceptos()">
+				        <% categoria.forEach((categorias)=>{  %>
+						<option value="<%=categorias.idCategoria %>">
+				         <%=categorias.Categoria%>
+				   </option>
+				<%})%>   
+				</select>
+				
+			  </div>
+			  <div class="mb-3">
+				<label for="idConcepto" class="form-label">Concepto</label>
+				
+				<select class="form-select" id="idConcepto" name="Concepto" >
+				<% if (data[0].Concepto==1)
+				{%>
+				     <option value="<%=data[0].Concepto %>">Sueldo</option>
+				<%}%>
+				</select>
+			  </div>
+			  
+			  <div class="mb-3">
+				<label for="idMonto" class="form-label">Monto</label>
+				<input type="input" class="form-control" id="idMonto" value="
+				
+				 <%=data[0].Monto%>
+				 
+				" name="Monto">
+			  </div>
+			  
+			  <div class="mb-3">
+				<label for="idFecha" class="form-label">Fecha</label>
+				<input type="date" class="form-control" id="idFecha" name="Fecha" 
+				value="<% if (typeof(data)!='undefined')
+				{%>
+				 <%=data[0].Fecha%>
+				 <%}%>">
+			  </div>
+			  
+			  
+              <button type="submit" class="btn btn-primary" onclick="ModificarMovimiento()">Modificar</button>
+			  <a href="/admin" class="btn btn-secondary">Volver</a>
+          </form>
+		</div>
+	   </div>
+     </div>	
+    <!--Axios-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+    	 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+    <script type="text/javascript" src="/js/funciones.js" ></script>
+	<script type="text/javascript">window.addEventListener('DOMContentLoaded', inicio, false);</script>    
+  </body>
+</html>
