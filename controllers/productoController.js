@@ -63,7 +63,7 @@ const obtenerMovimiento = (req,res)=>
 			
 			var json=JSON.parse(string);
 		    
-			console.log(json[0]);
+			
 
             res.render('ModificarMovimiento.ejs',{
 					               data:json[0],
@@ -123,7 +123,7 @@ const obtenerCategorias = (req,res)=>
 const obtenerConceptos = (req,res)=>
 {
 	
-    console.log(req.body);
+    
 	let idCategoria = req.params.idCategoria;
 	
     conexion_db.query('SELECT idConcepto,Concepto FROM `concepto` WHERE idCategoria = ?',[idCategoria],(err,results)=>
@@ -133,7 +133,7 @@ const obtenerConceptos = (req,res)=>
 	    else
 		{
 			var string=JSON.stringify(results);
-			//console.log(string);
+			
 			var json=JSON.parse(string);
 			res.json(json);
 			
@@ -146,10 +146,23 @@ const obtenerConceptos = (req,res)=>
 
 const modificarMovimiento = (req,res)=>
 {
-    
+   
+idmovimiento=req.params.idmovimiento;
 
-console.log(req.params);
+idcategoria=req.params.idcategoria;
+idconcepto=req.params.idconcepto;
+idtipomovimiento=req.params.idtipomovimiento;
+monto=req.params.monto;
 
+if (idtipomovimiento==2)
+{
+	monto=-monto;
+}
+conexion_db.query('UPDATE `movimientos` SET idcategoria=?,concepto= ?,monto=? WHERE idmovimiento = ?',[idcategoria,idconcepto,monto,idmovimiento],(err,results)=>{
+        if(err)
+        throw err;
+	    res.send('Modificacion exitosa!!');
+    })
    
     }
 	
