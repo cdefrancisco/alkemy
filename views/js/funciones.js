@@ -5,7 +5,7 @@ function eliminarProducto(id)
 	
         axios.delete(`http://localhost:8080/admin/movimientos/${id}`)
         .then(()=>{
-            alert('Producto eliminado en forma  EXITOSA!');
+            alert('Movimiento eliminado en forma  EXITOSA!');
             location.reload();
 			
         })
@@ -29,8 +29,16 @@ function ModificarMovimiento()
 	var Monto = document.getElementById("idMonto").value;
 	var Fecha = document.getElementById("idFecha").value;
 	
-	/*aca no me esta andando el put*/
-    axios.put(`http://localhost:8080/admin/movimientos/${idMovimiento}/Monto`);	
+	
+    axios.put(`http://localhost:8080/admin/movimientos/${idMovimiento}/${idTipoMovimiento}/${idCategoria}/${idConcepto}/${Monto}`)
+	.then(()=>{
+            alert('Movimiento editado en forma  EXITOSA!');
+            location.reload();
+			
+        })
+	
+	
+	
 }
 
 
