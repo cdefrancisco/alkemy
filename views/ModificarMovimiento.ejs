@@ -26,13 +26,13 @@
 	  <div class="card-boarder-secondary">
 	    <div class="card-header">Nuevo Registro</div>
 		<!-- en el action va la url productos del router-->
-		<input type="text" id="idMovimiento" name="idMovimiento" value="<%=data[0].idMovimiento %>">
+		<input type="text" id="idMovimiento" name="idMovimiento"  value="<%=data[0].idMovimiento %>">
           <form id="idFormMovimientos" action="" method="">
 			  <div class="mb-3">
 				
 				<label for="idTipo" class="form-label">Tipo Movimiento</label>
 				
-				<select class="form-select" id="idTipo" name="Tipo" >
+				<select class="form-select" id="idTipo" name="Tipo">
 				   
 				   <option value="<%=data[0].idTipo %>">
 				         <%=data[0].TipoMovimiento%>
@@ -46,11 +46,21 @@
 				<label for="idCategoria" class="form-label">Categoria</label>
 				
 				<select class="form-select" id="idCategoria" name="Categoria" onchange="cargarConceptos()">
-				        <% categoria.forEach((categorias)=>{  %>
-						<option value="<%=categorias.idCategoria %>">
+				        <% categoria.forEach((categorias)=>
+						{ if (data[0].idCategoria===categorias.idCategoria)
+                            {						
+						%>
+						<option value="<%=categorias.idCategoria %>" selected>
 				         <%=categorias.Categoria%>
-				   </option>
-				<%})%>   
+				       </option>
+					      <%}%>
+					      else
+						  {
+						  <option value="<%=categorias.idCategoria %>">
+				               <%=categorias.Categoria%>
+				           </option>
+						  }
+				      <%})%>   
 				</select>
 				
 			  </div>
@@ -61,13 +71,27 @@
 				<% if (data[0].Concepto==1)
 				{%>
 				     <option value="<%=data[0].Concepto %>">Sueldo</option>
-				<%}%>
+				<%}else 
+				{%>
+				
+				     <%
+				      concepto.forEach(conceptos=>
+					  { if (data[0].Concepto==conceptos.idConcepto)
+                          {	%>
+			                <option value="<%=conceptos.idConcepto %>" selected>
+         	                   <%=conceptos.Concepto%>
+	                        </option>
+                         <% }	
+                      })						  
+                }
+				%>
+				
 				</select>
 			  </div>
 			  
 			  <div class="mb-3">
-				<label for="idMonto" class="form-label">Monto</label>
-				<input type="input" class="form-control" id="idMonto" value="
+				<label for="idMonto" class="form-label" >Monto</label>
+				<input type="input" class="form-control" id="idMonto"  value="
 				
 				 <%=data[0].Monto%>
 				 
@@ -76,15 +100,21 @@
 			  
 			  <div class="mb-3">
 				<label for="idFecha" class="form-label">Fecha</label>
-				<input type="date" class="form-control" id="idFecha" name="Fecha" 
+				<input type="text" class="form-control" id="idFecha" name="Fecha" readonly
 				value="<% if (typeof(data)!='undefined')
-				{%>
-				 <%=data[0].Fecha%>
+				{
+				   let fechas=data[0].Fecha.substring(0, 10);
+				   
+				   fechas=fechas.split('-');
+				   fechas=fechas[2] +"/"+fechas[1]+"/"+fechas[0]
+				  
+				%>
+				 <%=fechas%>
 				 <%}%>">
 			  </div>
 			  
 			  
-              <button type="submit" class="btn btn-primary" onclick="ModificarMovimiento()">Modificar</button>
+              <button type="button" class="btn btn-primary" onclick="ModificarMovimiento()">Modificar</button>
 			  <a href="/admin" class="btn btn-secondary">Volver</a>
           </form>
 		</div>
