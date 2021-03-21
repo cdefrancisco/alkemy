@@ -21,7 +21,7 @@ movimientosRouter.get('/categorias/:movimiento',movimiento_controller.obtenerCat
 movimientosRouter.get('/conceptos/:idCategoria',movimiento_controller.obtenerConceptos);
 
 movimientosRouter.post('/movimientos', movimiento_controller.agregarMovimiento);
-movimientosRouter.put('/movimientos/:idmovimiento-:monto',movimiento_controller.modificarMovimiento);
+movimientosRouter.put('/movimientos/:idmovimiento/:idtipomovimiento/:idcategoria/:idconcepto/:monto',movimiento_controller.modificarMovimiento);
 
 movimientosRouter.delete('/movimientos/:movimiento',movimiento_controller.eliminarMovimiento);
 
